@@ -1,0 +1,12 @@
+---
+# defaults file for roles/kubernetes
+
+kubernetes_prerequisites_packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg2
+  - lsb-release
+  - bridge-utils
+
+kubernetes_version: 1.28.5-1.1
