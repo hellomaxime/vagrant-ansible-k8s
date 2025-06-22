@@ -33,6 +33,9 @@ Vagrant.configure(2) do |config|
     config.vm.define node[:hostname] do |cfg|
 			cfg.vm.hostname = node[:hostname]
       cfg.vm.network "private_network", ip: node[:ip]
+      if node[:type] == "kube_lb"
+        cfg.vm.network "public_network", ip: "192.168.1.200", bridge: "wlp59s0"
+      end
       cfg.vm.provider "virtualbox" do |v|
 				v.customize [ "modifyvm", :id, "--cpus", node[:cpus] ]
         v.customize [ "modifyvm", :id, "--memory", node[:mem] ]

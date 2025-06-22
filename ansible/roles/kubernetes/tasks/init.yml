@@ -10,7 +10,7 @@
   changed_when: false
 
 - name: Init cluster
-  command: "kubeadm init --apiserver-advertise-address={{ ansible_eth1.ipv4.address }} --apiserver-cert-extra-sans={{ ansible_eth1.ipv4.address }} --node-name={{ ansible_hostname }} --pod-network-cidr=10.200.0.0/16  --service-cidr=10.201.0.0/16  --control-plane-endpoint={{ kube_api_endpoint | default(ansible_eth1.ipv4.address) }}"
+  command: "kubeadm init --apiserver-advertise-address={{ ansible_eth1.ipv4.address }} --apiserver-cert-extra-sans={{ kube_api_endpoint }} --node-name={{ ansible_hostname }} --pod-network-cidr=10.200.0.0/16  --service-cidr=10.201.0.0/16  --control-plane-endpoint={{ kube_api_endpoint | default(ansible_eth1.ipv4.address) }}"
   register: __init_output
   when: not __kubeadm_already_init.stat.exists
 
